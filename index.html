@@ -1,0 +1,19 @@
+<meta charset="utf8" />
+<html>
+  <script src='./sql.js'></script>
+  <script>
+    var db;
+    window.onload = async function(){
+      const sqlPromise = initSqlJs({
+        locateFile: file => `./exam.db`
+      });
+      const dataPromise = fetch("./exam.db").then(res => res.arrayBuffer());
+      const [SQL, buf] = await Promise.all([sqlPromise, dataPromise])
+      db = new SQL.Database(new Uint8Array(buf));
+    }
+    
+  </script>
+  <body>
+    Output is in Javascript console
+  </body>
+</html>
